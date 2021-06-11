@@ -60,7 +60,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func getCategory() {
-        responseDrinkModel.getCategoryDrink(urlString: "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list", completion: {[weak self] (searchResults) in
+        responseDrinkModel.getCategoryDrink(urlString: Constants.url, completion: {[weak self] (searchResults) in
             self?.categoryList.append(contentsOf: searchResults!.drinks)
             self?.categoryList = searchResults!.drinks
             self?.tableView.reloadData()

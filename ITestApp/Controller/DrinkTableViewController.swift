@@ -51,7 +51,7 @@ class DrinkTableViewController: UITableViewController {
     }
     
     func requestFisrtData() {
-        responseDrinkModel.getCategoryDrink(urlString: "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list", completion: { (searchResults) in
+        responseDrinkModel.getCategoryDrink(urlString: Constants.url, completion: { (searchResults) in
             self.categoryList = searchResults!.drinks
             DispatchQueue.main.async {
                 for category in self.categoryList {

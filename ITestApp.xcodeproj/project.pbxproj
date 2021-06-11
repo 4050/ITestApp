@@ -22,6 +22,7 @@
 		85A813B7266FF8430079A208 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85A813B5266FF8430079A208 /* LaunchScreen.storyboard */; };
 		85A813C3266FFC070079A208 /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A813C2266FFC070079A208 /* NetworkDataFetcher.swift */; };
 		85A813C6266FFC450079A208 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A813C5266FFC450079A208 /* NetworkService.swift */; };
+		85B9BF992673D53800331A5B /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B9BF982673D53800331A5B /* Constans.swift */; };
 		85C0B2D426722FD400582C34 /* StringPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0B2D326722FD400582C34 /* StringPicker.swift */; };
 		85EDA89326714DD4000895E2 /* DrinkResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EDA89226714DD4000895E2 /* DrinkResponseModel.swift */; };
 		85EDA89526714F10000895E2 /* ImageDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EDA89426714F10000895E2 /* ImageDownloadService.swift */; };
@@ -45,6 +46,7 @@
 		85A813B8266FF8430079A208 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85A813C2266FFC070079A208 /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 		85A813C5266FFC450079A208 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		85B9BF982673D53800331A5B /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
 		85C0B2D326722FD400582C34 /* StringPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringPicker.swift; sourceTree = "<group>"; };
 		85EDA89226714DD4000895E2 /* DrinkResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkResponseModel.swift; sourceTree = "<group>"; };
 		85EDA89426714F10000895E2 /* ImageDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadService.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 		857D715E26714C41003739DC /* Constant */ = {
 			isa = PBXGroup;
 			children = (
+				85B9BF982673D53800331A5B /* Constans.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				85C0B2D426722FD400582C34 /* StringPicker.swift in Sources */,
 				85A813AD266FF8400079A208 /* SceneDelegate.swift in Sources */,
 				854D8EE4267253A0005ACD60 /* CategoryTableViewCell.swift in Sources */,
+				85B9BF992673D53800331A5B /* Constans.swift in Sources */,
 				854D8EE7267253F3005ACD60 /* CategoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
