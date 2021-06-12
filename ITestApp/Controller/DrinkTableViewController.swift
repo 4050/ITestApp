@@ -12,7 +12,7 @@ class DrinkTableViewController: UITableViewController {
     var responseDrinkModel = ResponseDrinkModel()
     var categoryList = [Category]()
     var drinkList = [Drink]()
-    var data:[(key:Category, values:[Drink])] = []
+    var data: [(key: Category, values: [Drink])] = []
     
     
     override func viewDidLoad() {
@@ -20,12 +20,12 @@ class DrinkTableViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         navigationController?.navigationBar.topItem?.title = "Drinks"
-        tableView.register(UINib(nibName: "CocktailTableViewCell", bundle: nil), forCellReuseIdentifier: "CocktailTableViewCell")
-        requestFisrtData()
+        tableView.register(UINib(nibName: Constants.cocktailTableViewCell, bundle: nil), forCellReuseIdentifier: Constants.cocktailTableViewCell)
+        requestFirstData()
     }
     
     @IBAction func didPressFilterButton(_ sender: Any) {
-        guard let categoryViewController = self.storyboard?.instantiateViewController(withIdentifier: "CategoryViewController") as? CategoryViewController else { return }
+        guard let categoryViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.categoryTableViewController) as? CategoryViewController else { return }
         categoryViewController.delegate = self
         navigationController?.pushViewController(categoryViewController, animated: true)
     }
@@ -43,41 +43,35 @@ class DrinkTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CocktailTableViewCell", for: indexPath) as! CocktailTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cocktailTableViewCell, for: indexPath) as! CocktailTableViewCell
         let drinks = data[indexPath.section].values[indexPath.row]
         cell.cocktailNameLabel.text = drinks.strDrink
         setImageToImageView(cell: cell, urlString: drinks.strDrinkThumb)
         return cell
     }
     
-    func requestFisrtData() {
+    func requestFirstData() {
         responseDrinkModel.getCategoryDrink(urlString: Constants.url, completion: { (searchResults) in
             self.categoryList = searchResults!.drinks
-            DispatchQueue.main.async {
-                for category in self.categoryList {
-                    let url: String = StringPicker.searchString(category.strCategory)
-                    self.responseDrinkModel.getDrink(urlString: url, completion: { [self](searchResults) in
-                        self.drinkList.append(contentsOf: searchResults!.drinks)
-                        data.append((Category(strCategory:category.strCategory), searchResults!.drinks))
-                        self.tableView.reloadData()
-                    })
-                }
+            for category in self.categoryList {
+                let url: String = StringPicker.searchString(category.strCategory)
+                self.responseDrinkModel.getDrink(urlString: url, completion: { [self](searchResults) in
+                    self.drinkList.append(contentsOf: searchResults!.drinks)
+                    data.append((Category(strCategory:category.strCategory), searchResults!.drinks))
+                    self.tableView.reloadData()
+                })
             }
-            
         })
     }
     
     func requestFilteringData() {
-        print(categoryList)
-        DispatchQueue.main.async {
-            for category in self.categoryList {
-                let url: String = StringPicker.searchString(category.strCategory)
-                self.responseDrinkModel.getDrink(urlString: url, completion: {(searchResults) in
-                    self.drinkList.append(contentsOf: searchResults!.drinks)
-                    self.data.append((Category(strCategory:category.strCategory), searchResults!.drinks))
-                    self.tableView.reloadData()
-                })
-            }
+        for category in self.categoryList {
+            let url: String = StringPicker.searchString(category.strCategory)
+            self.responseDrinkModel.getDrink(urlString: url, completion: {(searchResults) in
+                self.drinkList.append(contentsOf: searchResults!.drinks)
+                self.data.append((Category(strCategory:category.strCategory), searchResults!.drinks))
+                self.tableView.reloadData()
+            })
         }
     }
     

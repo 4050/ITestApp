@@ -9,5 +9,9 @@ import Foundation
 
 struct Constants {
     static let url: String = "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list"
+    static let categoryTableViewCell: String = "CategoryTableViewCell"
+    static let cocktailTableViewCell: String = "CocktailTableViewCell"
+    static let categoryTableViewController: String = "CategoryViewController"
+    
 
 }
