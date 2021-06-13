@@ -9,7 +9,7 @@ import UIKit
 
 
 class DrinkTableViewController: UITableViewController {
-    
+
     var responseDrinkModel = ResponseDrinkModel()
     var categoryList = [Category]()
     var drinkList = [Drink]()
@@ -60,7 +60,7 @@ class DrinkTableViewController: UITableViewController {
             print("Loading stop")
         }
     }
-    
+
     private func setImageToImageView(cell: CocktailTableViewCell, urlString: String) {
         cell.cocktailImageView.isHidden = true
         cell.spinnerAnimation(shouldSpin: true)
@@ -74,7 +74,7 @@ class DrinkTableViewController: UITableViewController {
             }
         }
     }
-    
+
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height - 100 - scrollView.frame.size.height) {
