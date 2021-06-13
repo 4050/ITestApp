@@ -36,7 +36,6 @@ class DrinkTableViewController: UITableViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView?.allowsMultipleSelection = true
         tableView.register(UINib(nibName: Constants.cocktailTableViewCell, bundle: nil), forCellReuseIdentifier: Constants.cocktailTableViewCell)
     }
     
@@ -48,18 +47,21 @@ class DrinkTableViewController: UITableViewController {
         switch dataSwitch {
         case .requestCategoriesData:
             responseDrinkModel.getCategoryDrink(urlString: Constants.url, completion: {[self] (searchResults) in
-                 self.categoryList = searchResults!.drinks
-                    requestData(index: index, dataSwitch: .requestDrinksData)
-             })
+                self.categoryList = searchResults!.drinks
+                requestData(index: index, dataSwitch: .requestDrinksData)
+            })
+            
         case .requestDrinksData:
             if index != categoryList.count {
                 let url: String = StringPicker.searchString(self.categoryList[index].strCategory)
-            self.responseDrinkModel.getDrink(urlString: url, completion: { [self](searchResults) in
+                self.responseDrinkModel.getDrink(urlString: url, completion: {[self] (searchResults) in
                     self.drinkList.append(contentsOf: searchResults!.drinks)
-                self.data.append((Category(strCategory: self.categoryList[index].strCategory), searchResults!.drinks))
-                self.isLoading = true
+                    self.data.append((Category(strCategory: self.categoryList[index].strCategory), searchResults!.drinks))
+                    self.isLoading = true
                     self.tableView.reloadData()
                 })
+            } else {
+                print("Loading stop")
             }
         }
     }
@@ -107,6 +109,7 @@ extension DrinkTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cocktailTableViewCell, for: indexPath) as! CocktailTableViewCell
         let drinks = data[indexPath.section].values[indexPath.row]
         cell.cocktailNameLabel.text = drinks.strDrink
+        cell.selectionStyle = .none
         setImageToImageView(cell: cell, urlString: drinks.strDrinkThumb)
         return cell
     }
