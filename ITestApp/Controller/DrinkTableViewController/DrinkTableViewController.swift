@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class DrinkTableViewController: UITableViewController {
 
     var responseDrinkModel = ResponseDrinkModel()

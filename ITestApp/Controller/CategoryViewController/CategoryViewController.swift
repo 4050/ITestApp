@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 protocol CategoryViewControllerDelegate {
     func categoryDidChanged(categories: [Category])
 }

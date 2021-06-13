@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct DrinkModel: Codable {
     let drinks: [Drink]
 }
