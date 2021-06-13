@@ -14,14 +14,11 @@ class DrinkTableViewController: UITableViewController {
     var drinkList = [Drink]()
     var data: [(key: Category, values: [Drink])] = []
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        navigationController?.navigationBar.topItem?.title = "Drinks"
-        tableView.register(UINib(nibName: Constants.cocktailTableViewCell, bundle: nil), forCellReuseIdentifier: Constants.cocktailTableViewCell)
-        requestFirstData()
+        setupTableView()
+        setupNavigationItem()
+        requestData()
     }
     
     @IBAction func didPressFilterButton(_ sender: Any) {
@@ -30,6 +27,59 @@ class DrinkTableViewController: UITableViewController {
         navigationController?.pushViewController(categoryViewController, animated: true)
     }
     
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView?.allowsMultipleSelection = true
+        tableView.register(UINib(nibName: Constants.cocktailTableViewCell, bundle: nil), forCellReuseIdentifier: Constants.cocktailTableViewCell)
+    }
+    
+    private func setupNavigationItem() {
+        navigationItem.title = "Drinks"
+    }
+    
+   private func requestData() {
+        responseDrinkModel.getCategoryDrink(urlString: Constants.url, completion: {(searchResults) in
+            self.categoryList = searchResults!.drinks
+            for category in self.categoryList {
+                let url: String = StringPicker.searchString(category.strCategory)
+                self.responseDrinkModel.getDrink(urlString: url, completion: { [self](searchResults) in
+                    self.drinkList.append(contentsOf: searchResults!.drinks)
+                    data.append((Category(strCategory:category.strCategory), searchResults!.drinks))
+                    self.tableView.reloadData()
+                })
+            }
+        })
+    }
+    
+    private func requestFilteringData() {
+        for category in self.categoryList {
+            let url: String = StringPicker.searchString(category.strCategory)
+            self.responseDrinkModel.getDrink(urlString: url, completion: {(searchResults) in
+                self.drinkList.append(contentsOf: searchResults!.drinks)
+                self.data.append((Category(strCategory:category.strCategory), searchResults!.drinks))
+                self.tableView.reloadData()
+            })
+        }
+    }
+    
+    private func setImageToImageView(cell: CocktailTableViewCell, urlString: String) {
+        cell.cocktailImageView.isHidden = true
+        cell.spinnerAnimation(shouldSpin: true)
+        responseDrinkModel.downloadImage(url: urlString) { (imageData) in
+            if let data = imageData {
+                DispatchQueue.main.async {
+                    cell.cocktailImageView.image = UIImage(data: data)
+                    cell.spinnerAnimation(shouldSpin: false)
+                    cell.cocktailImageView.isHidden = false
+                }
+            }
+        }
+    }
+}
+
+
+extension DrinkTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return data.count
     }
@@ -49,45 +99,6 @@ class DrinkTableViewController: UITableViewController {
         setImageToImageView(cell: cell, urlString: drinks.strDrinkThumb)
         return cell
     }
-    
-    func requestFirstData() {
-        responseDrinkModel.getCategoryDrink(urlString: Constants.url, completion: { (searchResults) in
-            self.categoryList = searchResults!.drinks
-            for category in self.categoryList {
-                let url: String = StringPicker.searchString(category.strCategory)
-                self.responseDrinkModel.getDrink(urlString: url, completion: { [self](searchResults) in
-                    self.drinkList.append(contentsOf: searchResults!.drinks)
-                    data.append((Category(strCategory:category.strCategory), searchResults!.drinks))
-                    self.tableView.reloadData()
-                })
-            }
-        })
-    }
-    
-    func requestFilteringData() {
-        for category in self.categoryList {
-            let url: String = StringPicker.searchString(category.strCategory)
-            self.responseDrinkModel.getDrink(urlString: url, completion: {(searchResults) in
-                self.drinkList.append(contentsOf: searchResults!.drinks)
-                self.data.append((Category(strCategory:category.strCategory), searchResults!.drinks))
-                self.tableView.reloadData()
-            })
-        }
-    }
-    
-    func setImageToImageView(cell: CocktailTableViewCell, urlString: String) {
-        cell.cocktailImageView.isHidden = true
-        cell.spinnerAnimation(shouldSpin: true)
-        responseDrinkModel.downloadImage(url: urlString) { (imageData) in
-            if let data = imageData {
-                DispatchQueue.main.async {
-                    cell.cocktailImageView.image = UIImage(data: data)
-                    cell.spinnerAnimation(shouldSpin: false)
-                    cell.cocktailImageView.isHidden = false
-                }
-            }
-        }
-    }
 }
 
 extension DrinkTableViewController: CategoryViewControllerDelegate {
@@ -97,7 +108,6 @@ extension DrinkTableViewController: CategoryViewControllerDelegate {
         self.categoryList = categories
         requestFilteringData()
     }
-    
 }
 
 

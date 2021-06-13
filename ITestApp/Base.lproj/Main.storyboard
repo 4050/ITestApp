@@ -22,7 +22,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Nc-uM-uP1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-341" y="88"/>
+            <point key="canvasLocation" x="-375" y="88"/>
         </scene>
         <!--Drink Table View Controller-->
         <scene sceneID="p8s-dP-BEt">
@@ -50,7 +50,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRB-tb-vof" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="481" y="88"/>
+            <point key="canvasLocation" x="330" y="88"/>
         </scene>
         <!--Category View Controller-->
         <scene sceneID="Hju-Xq-spi">
@@ -104,7 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gqI-YM-47B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1255" y="88"/>
+            <point key="canvasLocation" x="1055" y="88"/>
         </scene>
     </scenes>
     <resources>

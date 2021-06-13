@@ -89,6 +89,22 @@
 			path = Constant;
 			sourceTree = "<group>";
 		};
+		85898FF72674D37C007ED29A /* DrinkTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				85A813AE266FF8400079A208 /* DrinkTableViewController.swift */,
+			);
+			path = DrinkTableViewController;
+			sourceTree = "<group>";
+		};
+		85898FF82674D386007ED29A /* CategoryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				854D8EE6267253F3005ACD60 /* CategoryViewController.swift */,
+			);
+			path = CategoryViewController;
+			sourceTree = "<group>";
+		};
 		85A8139E266FF8400079A208 = {
 			isa = PBXGroup;
 			children = (
@@ -136,8 +152,8 @@
 		85A813BF266FF84F0079A208 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				85A813AE266FF8400079A208 /* DrinkTableViewController.swift */,
-				854D8EE6267253F3005ACD60 /* CategoryViewController.swift */,
+				85898FF82674D386007ED29A /* CategoryViewController */,
+				85898FF72674D37C007ED29A /* DrinkTableViewController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
