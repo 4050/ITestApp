@@ -9,8 +9,8 @@ import Foundation
 
 class ResponseDrinkModel {
     
-     private let networkDataFetch = NetworkDataFetcher()
-     private let imageDownloadService = ImageDownloadService()
+    private let networkDataFetch = NetworkDataFetcher()
+    private let imageDownloadService = ImageDownloadService()
     
     func getCategoryDrink(urlString: String, completion: @escaping (DrinkCategory?) -> Void) {
         networkDataFetch.drinkCategoryFetch(urlString: urlString) {(response, error) in

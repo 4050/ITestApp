@@ -26,7 +26,7 @@ class CategoryViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupNavigationItem()
-        getCategory()
+        getCategories()
     }
     
     @IBAction func didTapApplyButton(_ sender: UIButton) {
@@ -45,7 +45,7 @@ class CategoryViewController: UIViewController {
         navigationItem.title = "Filter"
     }
     
-    private func getCategory() {
+    private func getCategories() {
         responseDrinkModel.getCategoryDrink(urlString: Constants.url, completion: {[weak self] (searchResults) in
             self?.categoryList.append(contentsOf: searchResults!.drinks)
             self?.categoryList = searchResults!.drinks
